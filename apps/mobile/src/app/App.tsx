@@ -21,8 +21,10 @@ import {
   Outfit_800ExtraBold,
   Outfit_900Black,
 } from '@expo-google-fonts/outfit';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { G, Path } from 'react-native-svg';
 import { PrimaryButton } from '../components/primary-button';
+import QuestionAndOptions from './question-and-options';
 
 export const App = () => {
   const [fontsLoaded] = useFonts({
@@ -42,10 +44,9 @@ export const App = () => {
   }
 
   return (
-    <View style={{}}>
-      <PrimaryButton text="Start a quiz" />
-      <Text style={{ fontFamily: 'Outfit-Regular' }}>This is a test text</Text>
-    </View>
+    <SafeAreaProvider>
+      <QuestionAndOptions />
+    </SafeAreaProvider>
   );
 };
 const styles = StyleSheet.create({});

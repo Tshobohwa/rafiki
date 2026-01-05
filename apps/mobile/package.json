@@ -20,6 +20,7 @@
     "metro-resolver": "*",
     "react": "*",
     "react-native": "*",
+    "react-native-safe-area-context": "^5.6.2",
     "react-native-svg": "*",
     "react-native-svg-transformer": "*",
     "react-native-web": "*"
