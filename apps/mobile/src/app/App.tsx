@@ -25,6 +25,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { G, Path } from 'react-native-svg';
 import { PrimaryButton } from '../components/primary-button';
 import QuestionAndOptions from './question-and-options';
+import StartAQuizScreen from '../components/start-a-quiz';
 
 export const App = () => {
   const [fontsLoaded] = useFonts({
@@ -45,7 +46,7 @@ export const App = () => {
 
   return (
     <SafeAreaProvider>
-      <QuestionAndOptions />
+      <StartAQuizScreen />
     </SafeAreaProvider>
   );
 };
