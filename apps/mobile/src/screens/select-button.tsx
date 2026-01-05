@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity } from 'react-native';
 
-export default function SelectButtonScreen({
+export default function SelectButton({
   text,
   onPress,
 }: {
