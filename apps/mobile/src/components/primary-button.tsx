@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 export const PrimaryButton = (props: { text: string; icon?: ReactNode }) => {
   return (
     <TouchableOpacity style={styles.container}>
-      <Text>{props.text}</Text>
+      <Text style={{ fontFamily: 'Outfit-Regular' }}>{props.text}</Text>
       {props.icon}
     </TouchableOpacity>
   );

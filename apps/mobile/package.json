@@ -8,6 +8,7 @@
     "ios": "expo run:ios"
   },
   "dependencies": {
+    "@expo-google-fonts/outfit": "^0.4.3",
     "@expo/metro-config": "*",
     "@testing-library/react-native": "*",
     "expo": "*",
