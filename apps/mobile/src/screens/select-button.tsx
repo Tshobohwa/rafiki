@@ -17,10 +17,9 @@ export default function SelectButtonScreen({
         borderRadius: 30,
         justifyContent: 'center',
       }}
+      onPressOut={onPress}
     >
-      <Text style={{ fontFamily: 'Outfit-SemiBold', fontSize: 20 }}>
-        {text}
-      </Text>
+      <Text style={{ fontFamily: 'Outfit-Medium ', fontSize: 20 }}>{text}</Text>
     </TouchableOpacity>
   );
 }

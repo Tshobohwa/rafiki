@@ -19,9 +19,9 @@ export default function StartAQuizScreen() {
         <View
           style={{ marginTop: 20, width: '70%', gap: 12, alignSelf: 'center' }}
         >
-          <SelectButton text="Multiple Choice" />
-          <SelectButton text="Free Response" />
-          <SelectButton text="Case Question" />
+          <SelectButton text="Multiple Choice" onPress={() => {}} />
+          <SelectButton text="Free Response" onPress={() => {}} />
+          <SelectButton text="Case Question" onPress={() => {}} />
         </View>
       </View>
     </SafeAreaView>
