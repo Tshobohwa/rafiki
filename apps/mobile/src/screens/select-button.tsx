@@ -19,7 +19,7 @@ export default function SelectButtonScreen({
       }}
       onPressOut={onPress}
     >
-      <Text style={{ fontFamily: 'Outfit-Medium ', fontSize: 20 }}>{text}</Text>
+      <Text style={{ fontFamily: 'Outfit-Medium', fontSize: 20 }}>{text}</Text>
     </TouchableOpacity>
   );
 }
