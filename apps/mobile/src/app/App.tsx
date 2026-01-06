@@ -26,6 +26,7 @@ import Svg, { G, Path } from 'react-native-svg';
 import { PrimaryButton } from '../components/primary-button';
 import QuestionAndOptions from '../screens/question-and-options';
 import StartAQuizScreen from '../screens/start-a-quiz';
+import UploadFileOrPasteLink from '../screens/upload-file-or-paste-link';
 
 export const App = () => {
   const [fontsLoaded] = useFonts({
@@ -46,7 +47,7 @@ export const App = () => {
 
   return (
     <SafeAreaProvider>
-      <StartAQuizScreen />
+      <UploadFileOrPasteLink />
     </SafeAreaProvider>
   );
 };
