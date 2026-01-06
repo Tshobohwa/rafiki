@@ -1,6 +1,6 @@
 import { Text, View, ViewBase } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import SelectButton from '../screens/select-button';
+import SelectButton from '../components/select-button';
 
 export default function StartAQuizScreen() {
   return (
