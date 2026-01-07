@@ -4,7 +4,7 @@ export default function UploadFileButton() {
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.view}>
-        <Text style={{ fontFamily: 'Outfit-Medium', fontSize: 18 }}>
+        <Text style={{ fontFamily: 'Outfit-Medium', fontSize: 16 }}>
           Click to upload
         </Text>
       </View>
@@ -20,7 +20,7 @@ export default function UploadFileButton() {
         <View style={styles.documentTypeContainer}>
           <Image
             source={require('../../assets/images/google-docs.png')}
-            style={{ width: 16, height: 16, marginRight: 16 }}
+            style={{ width: 16, height: 16 }}
           />
           <Text style={styles.documentTypeText}>DOCX</Text>
         </View>
@@ -47,10 +47,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   view: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 8,
     backgroundColor: '#E0E0E0',
+    marginBottom: 8,
   },
   documentTypeContainer: {
     flexDirection: 'row',
@@ -58,5 +59,6 @@ const styles = StyleSheet.create({
   },
   documentTypeText: {
     fontFamily: 'Outfit-Regular',
+    fontSize: 14,
   },
 });
