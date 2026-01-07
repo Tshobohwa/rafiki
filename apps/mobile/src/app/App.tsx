@@ -47,7 +47,7 @@ export const App = () => {
 
   return (
     <SafeAreaProvider>
-      <UploadFileOrPasteLink />
+      <QuestionAndOptions />
     </SafeAreaProvider>
   );
 };
