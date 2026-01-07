@@ -4,6 +4,7 @@ import UploadFileButton from '../components/uplaod-file-button';
 import TextInputPrimary from '../components/text-input-primary';
 import { useState } from 'react';
 import { PrimaryButton } from '../components/primary-button';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function UploadFileOrPasteLink() {
   const [link, setLink] = useState('');
@@ -36,7 +37,10 @@ export default function UploadFileOrPasteLink() {
           onChangeText={(link) => setLink(link)}
         />
       </View>
-      <PrimaryButton text="Continue" />
+      <PrimaryButton
+        text="Continue"
+        icon={<AntDesign name="arrow-right" size={14} color="white" />}
+      />
     </SafeAreaView>
   );
 }
