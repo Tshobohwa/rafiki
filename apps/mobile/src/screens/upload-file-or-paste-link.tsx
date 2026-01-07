@@ -17,7 +17,15 @@ export default function UploadFileOrPasteLink() {
         Analyze my document to automatically create questions
       </Text>
       <UploadFileButton />
-      <Text style={{ fontFamily: 'Outfit-Normal' }}>Or</Text>
+      <Text
+        style={{
+          fontFamily: 'Outfit-Normal',
+          textAlign: 'center',
+          marginVertical: 24,
+        }}
+      >
+        Or
+      </Text>
       <TextInputPrimary
         placeholder="Paste a link here"
         value={link}
