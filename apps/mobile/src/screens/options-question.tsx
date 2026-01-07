@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import AnswerOption from '../components/answer-option';
 import { PrimaryButton } from '../components/primary-button';
 
-export default function QuestionAndOptions() {
+export default function OptionsQuestion() {
   const answers = [
     {
       id: 'A',
