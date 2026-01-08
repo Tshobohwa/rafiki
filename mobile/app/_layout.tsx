@@ -6,6 +6,18 @@ import {
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
+import { useFonts } from 'expo-font';
+import {
+  Outfit_100Thin,
+  Outfit_200ExtraLight,
+  Outfit_300Light,
+  Outfit_400Regular,
+  Outfit_500Medium,
+  Outfit_600SemiBold,
+  Outfit_700Bold,
+  Outfit_800ExtraBold,
+  Outfit_900Black,
+} from '@expo-google-fonts/outfit';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
