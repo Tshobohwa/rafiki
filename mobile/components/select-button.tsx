@@ -1,0 +1,25 @@
+import { Text, TouchableOpacity } from 'react-native';
+
+export default function SelectButton({
+  text,
+  onPress,
+}: {
+  text: string;
+  onPress?: () => void;
+}) {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        backgroundColor: '#E0E0E0',
+        alignItems: 'center',
+        height: 60,
+        borderRadius: 30,
+        justifyContent: 'center',
+      }}
+      onPressOut={onPress}
+    >
+      <Text style={{ fontFamily: 'Outfit-Medium', fontSize: 20 }}>{text}</Text>
+    </TouchableOpacity>
+  );
+}
