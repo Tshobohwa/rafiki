@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import UploadFileButton from '../components/uplaod-file-button';
+import UploadFileButton from '../components/upload-file-button';
 import TextInputPrimary from '../components/text-input-primary';
 import { useState } from 'react';
 import { PrimaryButton } from '../components/primary-button';

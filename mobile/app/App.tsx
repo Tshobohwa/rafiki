@@ -14,6 +14,8 @@ import {
 } from "@expo-google-fonts/outfit";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import FreeAnswerQuestion from "../screens/free-answer-question";
+import StartAQuizScreen from "@/screens/start-a-quiz";
+import UploadFileOrPasteLink from "@/screens/upload-file-or-paste-link";
 
 export const App = () => {
   const [fontsLoaded] = useFonts({
@@ -34,7 +36,7 @@ export const App = () => {
 
   return (
     <SafeAreaProvider>
-      <FreeAnswerQuestion />
+      <UploadFileOrPasteLink />
     </SafeAreaProvider>
   );
 };
