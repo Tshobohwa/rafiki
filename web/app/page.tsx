@@ -1,6 +1,13 @@
+import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { CardTitle } from "@/components/ui/card";
-import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 export default function Home() {
   return (
@@ -16,6 +23,45 @@ export default function Home() {
           </Button>
         </div>
       </nav>
+      <section className="px-80 py-60">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-4xl font-semibold text-center">
+              Redefine your learning experience with an intelligent, AI-powered
+              platform.
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="">
+            <p className="text-3xl text-center">
+              Maximize your potential using tailored learning journeys,
+              interactive lessons, and live progress tracking.
+            </p>
+            <p className="text-2xl text-center mt-4 mb-10">
+              Analyse your document to automatically create questions
+            </p>
+            <CardContent>
+              <div className="border p-7 flex flex-col items-center w-2/3 gap-7 rounded-3xl mx-auto mt-10 mb-10">
+                <Button>Click to upload</Button>
+                <div className="flex gap-10">
+                  <span>PDF</span>
+                  <span>DOCX</span>
+                  <span>Power Point</span>
+                </div>
+              </div>
+            </CardContent>
+            <Input
+              placeholder="Or paste a link here..."
+              className="placeholder:text-xl text-2xl h-15"
+            />
+          </CardContent>
+          <CardFooter>
+            <Button variant={"default"} className="w-full" size={"lg"}>
+              Create Quiz
+            </Button>
+          </CardFooter>
+        </Card>
+      </section>
+      <Footer />
     </div>
   );
 }
