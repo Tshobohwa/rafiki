@@ -1,3 +1,4 @@
+"use client";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,8 +9,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [link, setLink] = useState("");
+
+  useEffect(() => {
+    console.log("Link:", link);
+  }, [link]);
   return (
     <div className="">
       <nav className="sticky top-0 left-0 right-0 z-50 w-full flex items-center justify-between p-4 bg-white/75 backdrop-blur-sm h-20 border-b px-10">
@@ -51,11 +58,18 @@ export default function Home() {
             </CardContent>
             <Input
               placeholder="Or paste a link here..."
-              className="placeholder:text-xl text-2xl h-15"
+              className="text-lg placeholder:text-xl h-16 rounded-full p-6"
+              onChange={(e) => {
+                setLink(e.target.value);
+              }}
+              style={{ fontSize: 24 }}
             />
           </CardContent>
           <CardFooter>
-            <Button variant={"default"} className="w-full" size={"lg"}>
+            <Button
+              variant={"default"}
+              className="w-full h-15 rounded-full text-2xl"
+            >
               Create Quiz
             </Button>
           </CardFooter>
