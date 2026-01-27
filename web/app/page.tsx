@@ -9,10 +9,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [link, setLink] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     console.log("Link:", link);
@@ -22,10 +24,18 @@ export default function Home() {
       <nav className="sticky top-0 left-0 right-0 z-50 w-full flex items-center justify-between p-4 bg-white/75 backdrop-blur-sm h-20 border-b px-10">
         <CardTitle className="text-2xl">Rafiki</CardTitle>
         <div className="flex gap-5">
-          <Button variant={"secondary"} className="w-30">
+          <Button
+            variant={"secondary"}
+            className="w-30"
+            onClick={() => router.push("/auth/login")}
+          >
             Login
           </Button>
-          <Button variant={"default"} className="w-30">
+          <Button
+            variant={"default"}
+            className="w-30"
+            onClick={() => router.push("/auth/signup")}
+          >
             Sign Up
           </Button>
         </div>
