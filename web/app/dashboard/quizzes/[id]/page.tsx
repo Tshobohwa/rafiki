@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 const Question = ({ question }: { question: string }) => {
-  return <Card>{question}</Card>;
+  return <Card className="p-3 mb-4">{question}</Card>;
 };
 
 export default function Quiz() {
@@ -49,6 +49,10 @@ export default function Quiz() {
             isValid={answer.isValid}
           />
         ))}
+      </div>
+      <div className="flex justify-between items-center mt-4">
+        <Button>previous</Button>
+        <Button>Next</Button>
       </div>
     </div>
   );

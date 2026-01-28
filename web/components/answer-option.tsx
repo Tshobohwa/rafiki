@@ -14,6 +14,8 @@ export default function AnswerOption({
       onClick={() => {
         !isValid;
       }}
+      variant={"secondary"}
+      className="hover:bg-amber-50"
     >
       {answer}
     </Button>
