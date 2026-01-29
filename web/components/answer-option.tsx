@@ -15,7 +15,7 @@ export default function AnswerOption({
         !isValid;
       }}
       variant={"secondary"}
-      className="hover:bg-amber-50"
+      className="hover:bg-amber-50 hover:cursor-pointer active:border border-amber-200"
     >
       {answer}
     </Button>
