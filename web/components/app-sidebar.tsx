@@ -9,9 +9,15 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import { signOut } from "@/utils/supabase/actions/auth.action";
 
 export function AppSidebar() {
   const router = useRouter();
+  
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -55,7 +61,13 @@ export function AppSidebar() {
         <SidebarGroup />
       </SidebarContent>
       <SidebarFooter>
-        <div>Footer Content</div>
+        <Button
+          variant="outline"
+          className="w-full"
+          onClick={handleSignOut}
+        >
+          Logout
+        </Button>
       </SidebarFooter>
     </Sidebar>
   );

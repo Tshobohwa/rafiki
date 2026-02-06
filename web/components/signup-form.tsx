@@ -5,13 +5,14 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { useState } from "react";
-import { signIn, signInWithGoogle } from "@/utils/supabase/actions/auth.action";
+import { signUp, signInWithGoogle } from "@/utils/supabase/actions/auth.action";
 import Link from "next/link";
 import googleIcon from "../assets/google.png";
 
-export default function LoginForm() {
+export default function SignupForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,7 +20,18 @@ export default function LoginForm() {
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
-    const result = await signIn(formData);
+    const password = formData.get("password") as string;
+    const confirmPassword = formData.get("confirmPassword") as string;
+
+    if (password !== confirmPassword) {
+      setPasswordMatch(false);
+      setError("Passwords do not match");
+      setLoading(false);
+      return;
+    }
+
+    setPasswordMatch(true);
+    const result = await signUp(formData);
 
     if (result?.error) {
       setError(result.error);
@@ -41,9 +53,9 @@ export default function LoginForm() {
     <div className="flex items-center justify-center min-h-screen">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <h1 className="text-2xl font-bold">Login</h1>
+          <h1 className="text-2xl font-bold">Create an account</h1>
           <p className="text-sm text-muted-foreground">
-            Welcome back! Please login to your account
+            Sign up to get started
           </p>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
@@ -53,6 +65,13 @@ export default function LoginForm() {
                 {error}
               </div>
             )}
+            <Input
+              name="fullName"
+              type="text"
+              placeholder="Enter your full name"
+              required
+              disabled={loading}
+            />
             <Input
               name="email"
               type="email"
@@ -66,17 +85,25 @@ export default function LoginForm() {
               placeholder="Enter your password"
               required
               disabled={loading}
+              minLength={6}
+            />
+            <Input
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm your password"
+              required
+              disabled={loading}
+              minLength={6}
+              className={!passwordMatch ? "border-red-500" : ""}
             />
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
+              {loading ? "Creating account..." : "Sign up"}
             </Button>
           </form>
 
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-3">
             <hr className="w-20" />
-            <p className="text-center text-sm text-muted-foreground">
-              or continue with
-            </p>
+            <p className="text-sm text-muted-foreground">or continue with</p>
             <hr className="w-20" />
           </div>
 
@@ -92,9 +119,9 @@ export default function LoginForm() {
           </Button>
 
           <p className="text-center text-sm text-muted-foreground">
-            Don&apos;t have an account?{" "}
-            <Link href="/auth/signup" className="text-primary hover:underline">
-              Sign up
+            Already have an account?{" "}
+            <Link href="/auth/login" className="text-primary hover:underline">
+              Login
             </Link>
           </p>
         </CardContent>
