@@ -4,11 +4,15 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Card, CardContent, CardHeader } from "./ui/card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    console.log(email, password)
+  }, [email, password])
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -31,7 +35,7 @@ export default function LoginForm() {
             }}
           />
           <Button className="w-full">Login</Button>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center gap-2">
             <hr className="w-20" />
             <p className="text-center">or continue with</p>
             <hr className="w-20" />
