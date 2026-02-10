@@ -6,16 +6,47 @@ import { randomUUID } from "crypto";
 export const getDocuments = async () => {
   try {
     const supabase = await createClient();
-    const response = await supabase.from("documents").select();
-    console.log("response", response);
     
-    if (response.error) {
-      console.error("Supabase error:", response.error);
-      return { data: null, error: response.error };
+    // Get authenticated user
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    
+    if (authError || !user) {
+      console.error("Authentication error:", authError);
+      return { data: null, error: "User not authenticated" };
     }
     
-    console.log("documents data:", response.data);
-    return response.data;
+    // List files from storage bucket for the current user
+    const { data: files, error: listError } = await supabase.storage
+      .from("documents")
+      .list(user.id, {
+        limit: 100,
+        offset: 0,
+        sortBy: { column: 'created_at', order: 'desc' }
+      });
+    
+    if (listError) {
+      console.error("Storage list error:", listError);
+      return { data: null, error: listError };
+    }
+    
+    // Map files to include public URLs
+    const lessons = files?.map(file => {
+      const { data: { publicUrl } } = supabase.storage
+        .from("documents")
+        .getPublicUrl(`${user.id}/${file.name}`);
+      
+      return {
+        id: file.id,
+        name: file.name,
+        created_at: file.created_at,
+        updated_at: file.updated_at,
+        publicUrl,
+        userId: user.id
+      };
+    }) || [];
+    
+    console.log("documents data:", lessons);
+    return lessons;
   } catch (error) {
     console.error("Error fetching documents:", error);
     return { data: null, error };
@@ -83,4 +114,3 @@ export const postDocument = async ({ file } : { file: File}) => {
 };
 
 export const deleteDocument = async () => {};
- 
