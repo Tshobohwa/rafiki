@@ -1,7 +1,7 @@
 import { getDocuments } from "@/utils/supabase/actions/document.action";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { FileText, ExternalLink, Calendar, Clock } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { FileText } from "lucide-react";
+import { DocumentCard } from "@/components/document-card";
 
 interface Document {
   id: string;
@@ -29,30 +29,6 @@ export default async function ClassesPage() {
 
   const documents = (Array.isArray(result) ? result : []) as Document[];
 
-  // Extract clean filename from the UUID-prefixed name
-  const getCleanFileName = (name: string) => {
-    const parts = name.split('-');
-    if (parts.length > 5) {
-      return parts.slice(5).join('-');
-    }
-    return name;
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
-
-  const formatTime = (dateString: string) => {
-    return new Date(dateString).toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
   return (
     <div className="p-6">
       <div className="mb-6">
@@ -75,62 +51,7 @@ export default async function ClassesPage() {
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {documents.map((doc) => (
-            <Card key={doc.id} className="hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <div className="flex items-start gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <FileText className="h-5 w-5 text-primary" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <CardTitle className="text-base line-clamp-2">
-                      {getCleanFileName(doc.name)}
-                    </CardTitle>
-                    <CardDescription className="mt-1">
-                      Document
-                    </CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              
-              <CardContent>
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
-                    <span>Created: {formatDate(doc.created_at)}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Clock className="h-4 w-4" />
-                    <span>Updated: {formatTime(doc.updated_at)}</span>
-                  </div>
-                </div>
-              </CardContent>
-              
-              <CardFooter className="gap-2">
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="flex-1"
-                  asChild
-                >
-                  <a 
-                    href={doc.publicUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
-                    <ExternalLink className="h-4 w-4" />
-                    View
-                  </a>
-                </Button>
-                <Button 
-                  variant="default" 
-                  size="sm" 
-                  className="flex-1"
-                >
-                  Create Quiz
-                </Button>
-              </CardFooter>
-            </Card>
+            <DocumentCard key={doc.id} document={doc} />
           ))}
         </div>
       )}

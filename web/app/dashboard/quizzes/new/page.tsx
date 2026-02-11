@@ -2,32 +2,28 @@
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { postDocument } from "@/utils/supabase/actions/document.action";
+import { createQuiz } from "@/utils/supabase/actions/quiz.action";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
 export default function NewQuizPage() {
+  const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isUploading, setIsUploading] = useState(false);
-  const [uploadedFile, setUploadedFile] = useState<string | null>(null);
+  const [isCreating, setIsCreating] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleFileUpload = async (file: File) => {
+  const handleFileSelect = (file: File) => {
     if (!file) return;
-    console.log(file);
     
-    setIsUploading(true);
-    try {
-      const result = await postDocument({ file });
-
-      console.log(result);
-      if (result?.success) {
-        setUploadedFile(file.name);
-      }
-    } catch (error) {
-      console.error("Upload failed:", error);
-    } finally {
-      setIsUploading(false);
+    const validTypes = ["application/pdf", "text/plain"];
+    if (!validTypes.includes(file.type)) {
+      setError("Please upload a PDF or TXT file");
+      return;
     }
+    
+    setSelectedFile(file);
+    setError(null);
   };
 
   const handleButtonClick = () => {
@@ -37,16 +33,15 @@ export default function NewQuizPage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      handleFileUpload(file);
+      handleFileSelect(file);
     }
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
-    console.log(file)
     if (file) {
-      handleFileUpload(file);
+      handleFileSelect(file);
     }
   };
 
@@ -54,15 +49,43 @@ export default function NewQuizPage() {
     e.preventDefault();
   };
 
+  const handleCreateQuiz = async () => {
+    if (!selectedFile) {
+      setError("Please select a file first");
+      return;
+    }
+
+    setIsCreating(true);
+    setError(null);
+
+    try {
+      const result = await createQuiz({ file: selectedFile });
+
+      if (result.error) {
+        setError(result.error);
+        return;
+      }
+
+      if (result.data) {
+        router.push(`/quiz/${result.data.id}`);
+      }
+    } catch (err) {
+      console.error("Quiz creation failed:", err);
+      setError("Failed to create quiz. Please try again.");
+    } finally {
+      setIsCreating(false);
+    }
+  };
+
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-3xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Create a New Quiz</h1>
-      <p>
-        Upload a file, or paste a link to generate quiz questions from the
-        content.
+      <p className="mb-6 text-gray-600">
+        Upload a PDF or TXT file to generate quiz questions from the content.
       </p>
+      
       <Card 
-        className="flex flex-col items-center p-8 border-dashed border-2 hover:border-gray-400 transition-colors cursor-pointer" 
+        className="flex flex-col items-center p-8 border-dashed border-2 hover:border-gray-400 transition-colors cursor-pointer mb-6" 
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onClick={handleButtonClick}
@@ -70,32 +93,46 @@ export default function NewQuizPage() {
         <input
           ref={fileInputRef}
           type="file"
-          accept=".pdf,.docx,.txt,.pptx"
+          accept=".pdf,.txt"
           onChange={handleFileChange}
           className="hidden"
         />
         <Button 
           className="w-fit"
-          disabled={isUploading}
+          disabled={isCreating}
           type="button"
         >
-          {isUploading ? "Uploading..." : "Upload File"}
+          {selectedFile ? "Change File" : "Upload File"}
         </Button>
         <p className="text-sm text-gray-600 mt-2">
-          Supported files: PDF, DOCX, TXT, PPTX
+          Supported files: PDF, TXT
         </p>
-        {uploadedFile && (
+        {selectedFile && (
           <p className="text-sm text-green-600 mt-2">
-            ✓ Uploaded: {uploadedFile}
+            ✓ Selected: {selectedFile.name}
           </p>
         )}
       </Card>
-      <Input
-        placeholder="Or upload your link here ..."
-        className="h-15 rounded-full mt-4"
-        style={{ fontSize: 20 }}
-      />
-      <Button className="mt-4">Start the quiz</Button>
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
+          {error}
+        </div>
+      )}
+
+      <Button 
+        className="w-full"
+        onClick={handleCreateQuiz}
+        disabled={!selectedFile || isCreating}
+      >
+        {isCreating ? "Creating Quiz..." : "Generate Quiz"}
+      </Button>
+
+      {isCreating && (
+        <p className="text-sm text-gray-500 mt-4 text-center">
+          This may take a minute. We're analyzing your document and generating questions...
+        </p>
+      )}
     </div>
   );
 }
