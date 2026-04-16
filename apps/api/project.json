@@ -1,15 +1,14 @@
 {
   "name": "api",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "api/src",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/api/src",
   "projectType": "application",
   "targets": {
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "webpack-cli build",
-        "args": ["--node-env=production"],
-        "cwd": "api"
+        "command": "cd apps/api && webpack-cli build",
+        "args": ["--node-env=production"]
       },
       "configurations": {
         "development": {

@@ -1,0 +1,29 @@
+{
+  "name": "mobile",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/mobile/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "start": {
+      "executor": "@nx/react-native:start",
+      "options": {}
+    },
+    "run-android": {
+      "executor": "@nx/react-native:run-android",
+      "options": {}
+    },
+    "run-ios": {
+      "executor": "@nx/react-native:run-ios",
+      "options": {}
+    },
+    "build-android": {
+      "executor": "@nx/react-native:build-android",
+      "options": {}
+    },
+    "build-ios": {
+      "executor": "@nx/react-native:build-ios",
+      "options": {}
+    }
+  }
+}
