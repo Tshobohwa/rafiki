@@ -139,7 +139,7 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const globalPrefix = 'api';
     app.setGlobalPrefix(globalPrefix);
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 3333;
     await app.listen(port);
     common_1.Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
 }
