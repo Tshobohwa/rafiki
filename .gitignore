@@ -77,3 +77,4 @@ yarn-error.log
 
 
 vite.config.*.timestamp*
+/generated/prisma
