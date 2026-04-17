@@ -25,9 +25,8 @@ model Material {
   id        String   @id @default(uuid()) @db.Uuid
   name      String
   description String?
-  url       String?
+  url       String   // File path on disk
   fileType  String   // txt, pdf, docx, etc.
-  fileData  Bytes
   userId    String   @db.Uuid
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())

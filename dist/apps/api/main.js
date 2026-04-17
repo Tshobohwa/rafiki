@@ -32,12 +32,13 @@ const app_controller_1 = __webpack_require__(6);
 const app_service_1 = __webpack_require__(7);
 const prisma_module_1 = __webpack_require__(8);
 const users_module_1 = __webpack_require__(21);
+const materials_module_1 = __webpack_require__(26);
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = tslib_1.__decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, users_module_1.UserModule],
+        imports: [prisma_module_1.PrismaModule, users_module_1.UserModule, materials_module_1.MaterialsModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
@@ -235,7 +236,7 @@ const config = {
     "clientVersion": "7.7.0",
     "engineVersion": "75cbdc1eb7150937890ad5465d861175c6624711",
     "activeProvider": "postgresql",
-    "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Get a free hosted Postgres database in seconds: `npx create-db`\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id        String  @id @default(uuid()) @db.Uuid\n  email     String  @unique\n  firstName String?\n  lastName  String?\n  avatar    String?\n}\n",
+    "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Get a free hosted Postgres database in seconds: `npx create-db`\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id        String     @id @default(uuid()) @db.Uuid\n  email     String     @unique\n  firstName String?\n  lastName  String?\n  avatar    String?\n  materials Material[]\n}\n\nmodel Material {\n  id          String   @id @default(uuid()) @db.Uuid\n  name        String\n  description String?\n  url         String // File path on disk\n  fileType    String // txt, pdf, docx, etc.\n  userId      String   @db.Uuid\n  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n}\n",
     "runtimeDataModel": {
         "models": {},
         "enums": {},
@@ -246,10 +247,10 @@ const config = {
         "graph": ""
     }
 };
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"avatar\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}");
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"avatar\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"materials\",\"kind\":\"object\",\"type\":\"Material\",\"relationName\":\"MaterialToUser\"}],\"dbName\":null},\"Material\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fileType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"MaterialToUser\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}");
 config.parameterizationSchema = {
-    strings: JSON.parse("[\"where\",\"User.findUnique\",\"User.findUniqueOrThrow\",\"orderBy\",\"cursor\",\"User.findFirst\",\"User.findFirstOrThrow\",\"User.findMany\",\"data\",\"User.createOne\",\"User.createMany\",\"User.createManyAndReturn\",\"User.updateOne\",\"User.updateMany\",\"User.updateManyAndReturn\",\"create\",\"update\",\"User.upsertOne\",\"User.deleteOne\",\"User.deleteMany\",\"having\",\"_count\",\"_min\",\"_max\",\"User.groupBy\",\"User.aggregate\",\"AND\",\"OR\",\"NOT\",\"id\",\"email\",\"firstName\",\"lastName\",\"avatar\",\"equals\",\"in\",\"notIn\",\"lt\",\"lte\",\"gt\",\"gte\",\"contains\",\"startsWith\",\"endsWith\",\"not\",\"set\"]"),
-    graph: "LwkQCBoAACUAMBsAAAQAEBwAACUAMB0BAAAAAR4BAAAAAR8BACgAISABACgAISEBACgAIQEAAAABACABAAAAAQAgCBoAACUAMBsAAAQAEBwAACUAMB0BACYAIR4BACcAIR8BACgAISABACgAISEBACgAIQMfAAAqACAgAAAqACAhAAAqACADAAAABAAgAwAABQAwBAAAAQAgAwAAAAQAIAMAAAUAMAQAAAEAIAMAAAAEACADAAAFADAEAAABACAFHQEAAAABHgEAAAABHwEAAAABIAEAAAABIQEAAAABAQgAAAkAIAUdAQAAAAEeAQAAAAEfAQAAAAEgAQAAAAEhAQAAAAEBCAAACwAwAQgAAAsAMAUdAQAuACEeAQAuACEfAQAvACEgAQAvACEhAQAvACECAAAAAQAgCAAADgAgBR0BAC4AIR4BAC4AIR8BAC8AISABAC8AISEBAC8AIQIAAAAEACAIAAAQACACAAAABAAgCAAAEAAgAwAAAAEAIA8AAAkAIBAAAA4AIAEAAAABACABAAAABAAgBhUAACsAIBYAAC0AIBcAACwAIB8AACoAICAAACoAICEAACoAIAgaAAAaADAbAAAXABAcAAAaADAdAQAbACEeAQAcACEfAQAdACEgAQAdACEhAQAdACEDAAAABAAgAwAAFgAwFAAAFwAgAwAAAAQAIAMAAAUAMAQAAAEAIAgaAAAaADAbAAAXABAcAAAaADAdAQAbACEeAQAcACEfAQAdACEgAQAdACEhAQAdACELFQAAIgAgFgAAIwAgFwAAIwAgIgEAAAABIwEAAAAEJAEAAAAEJQEAAAABJgEAAAABJwEAAAABKAEAAAABLAEAJAAhDhUAACIAIBYAACMAIBcAACMAICIBAAAAASMBAAAABCQBAAAABCUBAAAAASYBAAAAAScBAAAAASgBAAAAASkBAAAAASoBAAAAASsBAAAAASwBACEAIQ4VAAAfACAWAAAgACAXAAAgACAiAQAAAAEjAQAAAAUkAQAAAAUlAQAAAAEmAQAAAAEnAQAAAAEoAQAAAAEpAQAAAAEqAQAAAAErAQAAAAEsAQAeACEOFQAAHwAgFgAAIAAgFwAAIAAgIgEAAAABIwEAAAAFJAEAAAAFJQEAAAABJgEAAAABJwEAAAABKAEAAAABKQEAAAABKgEAAAABKwEAAAABLAEAHgAhCCICAAAAASMCAAAABSQCAAAABSUCAAAAASYCAAAAAScCAAAAASgCAAAAASwCAB8AIQsiAQAAAAEjAQAAAAUkAQAAAAUlAQAAAAEmAQAAAAEnAQAAAAEoAQAAAAEpAQAAAAEqAQAAAAErAQAAAAEsAQAgACEOFQAAIgAgFgAAIwAgFwAAIwAgIgEAAAABIwEAAAAEJAEAAAAEJQEAAAABJgEAAAABJwEAAAABKAEAAAABKQEAAAABKgEAAAABKwEAAAABLAEAIQAhCCICAAAAASMCAAAABCQCAAAABCUCAAAAASYCAAAAAScCAAAAASgCAAAAASwCACIAIQsiAQAAAAEjAQAAAAQkAQAAAAQlAQAAAAEmAQAAAAEnAQAAAAEoAQAAAAEpAQAAAAEqAQAAAAErAQAAAAEsAQAjACELFQAAIgAgFgAAIwAgFwAAIwAgIgEAAAABIwEAAAAEJAEAAAAEJQEAAAABJgEAAAABJwEAAAABKAEAAAABLAEAJAAhCBoAACUAMBsAAAQAEBwAACUAMB0BACYAIR4BACcAIR8BACgAISABACgAISEBACgAIQgiAQAAAAEjAQAAAAQkAQAAAAQlAQAAAAEmAQAAAAEnAQAAAAEoAQAAAAEsAQApACELIgEAAAABIwEAAAAEJAEAAAAEJQEAAAABJgEAAAABJwEAAAABKAEAAAABKQEAAAABKgEAAAABKwEAAAABLAEAIwAhCyIBAAAAASMBAAAABSQBAAAABSUBAAAAASYBAAAAAScBAAAAASgBAAAAASkBAAAAASoBAAAAASsBAAAAASwBACAAIQgiAQAAAAEjAQAAAAQkAQAAAAQlAQAAAAEmAQAAAAEnAQAAAAEoAQAAAAEsAQApACEAAAAAAS0BAAAAAQEtAQAAAAEAAAAAAxUABhYABxcACAAAAAMVAAYWAAcXAAgBAgECAwEFBgEGBwEHCAEJCgEKDAILDQMMDwENEQIOEgQREwESFAETFQIYGAUZGQk"
+    strings: JSON.parse("[\"where\",\"orderBy\",\"cursor\",\"user\",\"materials\",\"_count\",\"User.findUnique\",\"User.findUniqueOrThrow\",\"User.findFirst\",\"User.findFirstOrThrow\",\"User.findMany\",\"data\",\"User.createOne\",\"User.createMany\",\"User.createManyAndReturn\",\"User.updateOne\",\"User.updateMany\",\"User.updateManyAndReturn\",\"create\",\"update\",\"User.upsertOne\",\"User.deleteOne\",\"User.deleteMany\",\"having\",\"_min\",\"_max\",\"User.groupBy\",\"User.aggregate\",\"Material.findUnique\",\"Material.findUniqueOrThrow\",\"Material.findFirst\",\"Material.findFirstOrThrow\",\"Material.findMany\",\"Material.createOne\",\"Material.createMany\",\"Material.createManyAndReturn\",\"Material.updateOne\",\"Material.updateMany\",\"Material.updateManyAndReturn\",\"Material.upsertOne\",\"Material.deleteOne\",\"Material.deleteMany\",\"Material.groupBy\",\"Material.aggregate\",\"AND\",\"OR\",\"NOT\",\"id\",\"name\",\"description\",\"url\",\"fileType\",\"userId\",\"createdAt\",\"updatedAt\",\"equals\",\"in\",\"notIn\",\"lt\",\"lte\",\"gt\",\"gte\",\"not\",\"contains\",\"startsWith\",\"endsWith\",\"email\",\"firstName\",\"lastName\",\"avatar\",\"every\",\"some\",\"none\",\"is\",\"isNot\",\"connectOrCreate\",\"upsert\",\"createMany\",\"set\",\"disconnect\",\"delete\",\"connect\",\"updateMany\",\"deleteMany\"]"),
+    graph: "bhIgCQQAAEgAICwAAEQAMC0AAAkAEC4AAEQAMC8BAAAAAUIBAAAAAUMBAEcAIUQBAEcAIUUBAEcAIQEAAAABACAMAwAATAAgLAAASgAwLQAAAwAQLgAASgAwLwEARQAhMAEARgAhMQEARwAhMgEARgAhMwEARgAhNAEARQAhNUAASwAhNkAASwAhAgMAAGgAIDEAAE0AIAwDAABMACAsAABKADAtAAADABAuAABKADAvAQAAAAEwAQBGACExAQBHACEyAQBGACEzAQBGACE0AQBFACE1QABLACE2QABLACEDAAAAAwAgAQAABAAwAgAABQAgAQAAAAMAIAEAAAABACAJBAAASAAgLAAARAAwLQAACQAQLgAARAAwLwEARQAhQgEARgAhQwEARwAhRAEARwAhRQEARwAhBAQAAGcAIEMAAE0AIEQAAE0AIEUAAE0AIAMAAAAJACABAAAKADACAAABACADAAAACQAgAQAACgAwAgAAAQAgAwAAAAkAIAEAAAoAMAIAAAEAIAYEAABmACAvAQAAAAFCAQAAAAFDAQAAAAFEAQAAAAFFAQAAAAEBCwAADgAgBS8BAAAAAUIBAAAAAUMBAAAAAUQBAAAAAUUBAAAAAQELAAAQADABCwAAEAAwBgQAAFkAIC8BAFEAIUIBAFEAIUMBAFIAIUQBAFIAIUUBAFIAIQIAAAABACALAAATACAFLwEAUQAhQgEAUQAhQwEAUgAhRAEAUgAhRQEAUgAhAgAAAAkAIAsAABUAIAIAAAAJACALAAAVACADAAAAAQAgEgAADgAgEwAAEwAgAQAAAAEAIAEAAAAJACAGBQAAVgAgGAAAWAAgGQAAVwAgQwAATQAgRAAATQAgRQAATQAgCCwAAEMAMC0AABwAEC4AAEMAMC8BADYAIUIBADcAIUMBADgAIUQBADgAIUUBADgAIQMAAAAJACABAAAbADAXAAAcACADAAAACQAgAQAACgAwAgAAAQAgAQAAAAUAIAEAAAAFACADAAAAAwAgAQAABAAwAgAABQAgAwAAAAMAIAEAAAQAMAIAAAUAIAMAAAADACABAAAEADACAAAFACAJAwAAVQAgLwEAAAABMAEAAAABMQEAAAABMgEAAAABMwEAAAABNAEAAAABNUAAAAABNkAAAAABAQsAACQAIAgvAQAAAAEwAQAAAAExAQAAAAEyAQAAAAEzAQAAAAE0AQAAAAE1QAAAAAE2QAAAAAEBCwAAJgAwAQsAACYAMAkDAABUACAvAQBRACEwAQBRACExAQBSACEyAQBRACEzAQBRACE0AQBRACE1QABTACE2QABTACECAAAABQAgCwAAKQAgCC8BAFEAITABAFEAITEBAFIAITIBAFEAITMBAFEAITQBAFEAITVAAFMAITZAAFMAIQIAAAADACALAAArACACAAAAAwAgCwAAKwAgAwAAAAUAIBIAACQAIBMAACkAIAEAAAAFACABAAAAAwAgBAUAAE4AIBgAAFAAIBkAAE8AIDEAAE0AIAssAAA1ADAtAAAyABAuAAA1ADAvAQA2ACEwAQA3ACExAQA4ACEyAQA3ACEzAQA3ACE0AQA2ACE1QAA5ACE2QAA5ACEDAAAAAwAgAQAAMQAwFwAAMgAgAwAAAAMAIAEAAAQAMAIAAAUAIAssAAA1ADAtAAAyABAuAAA1ADAvAQA2ACEwAQA3ACExAQA4ACEyAQA3ACEzAQA3ACE0AQA2ACE1QAA5ACE2QAA5ACELBQAAOwAgGAAAQQAgGQAAQQAgNwEAAAABOAEAAAAEOQEAAAAEOgEAAAABOwEAAAABPAEAAAABPQEAAAABPgEAQgAhDgUAADsAIBgAAEEAIBkAAEEAIDcBAAAAATgBAAAABDkBAAAABDoBAAAAATsBAAAAATwBAAAAAT0BAAAAAT4BAEAAIT8BAAAAAUABAAAAAUEBAAAAAQ4FAAA-ACAYAAA_ACAZAAA_ACA3AQAAAAE4AQAAAAU5AQAAAAU6AQAAAAE7AQAAAAE8AQAAAAE9AQAAAAE-AQA9ACE_AQAAAAFAAQAAAAFBAQAAAAELBQAAOwAgGAAAPAAgGQAAPAAgN0AAAAABOEAAAAAEOUAAAAAEOkAAAAABO0AAAAABPEAAAAABPUAAAAABPkAAOgAhCwUAADsAIBgAADwAIBkAADwAIDdAAAAAAThAAAAABDlAAAAABDpAAAAAATtAAAAAATxAAAAAAT1AAAAAAT5AADoAIQg3AgAAAAE4AgAAAAQ5AgAAAAQ6AgAAAAE7AgAAAAE8AgAAAAE9AgAAAAE-AgA7ACEIN0AAAAABOEAAAAAEOUAAAAAEOkAAAAABO0AAAAABPEAAAAABPUAAAAABPkAAPAAhDgUAAD4AIBgAAD8AIBkAAD8AIDcBAAAAATgBAAAABTkBAAAABToBAAAAATsBAAAAATwBAAAAAT0BAAAAAT4BAD0AIT8BAAAAAUABAAAAAUEBAAAAAQg3AgAAAAE4AgAAAAU5AgAAAAU6AgAAAAE7AgAAAAE8AgAAAAE9AgAAAAE-AgA-ACELNwEAAAABOAEAAAAFOQEAAAAFOgEAAAABOwEAAAABPAEAAAABPQEAAAABPgEAPwAhPwEAAAABQAEAAAABQQEAAAABDgUAADsAIBgAAEEAIBkAAEEAIDcBAAAAATgBAAAABDkBAAAABDoBAAAAATsBAAAAATwBAAAAAT0BAAAAAT4BAEAAIT8BAAAAAUABAAAAAUEBAAAAAQs3AQAAAAE4AQAAAAQ5AQAAAAQ6AQAAAAE7AQAAAAE8AQAAAAE9AQAAAAE-AQBBACE_AQAAAAFAAQAAAAFBAQAAAAELBQAAOwAgGAAAQQAgGQAAQQAgNwEAAAABOAEAAAAEOQEAAAAEOgEAAAABOwEAAAABPAEAAAABPQEAAAABPgEAQgAhCCwAAEMAMC0AABwAEC4AAEMAMC8BADYAIUIBADcAIUMBADgAIUQBADgAIUUBADgAIQkEAABIACAsAABEADAtAAAJABAuAABEADAvAQBFACFCAQBGACFDAQBHACFEAQBHACFFAQBHACEINwEAAAABOAEAAAAEOQEAAAAEOgEAAAABOwEAAAABPAEAAAABPQEAAAABPgEASQAhCzcBAAAAATgBAAAABDkBAAAABDoBAAAAATsBAAAAATwBAAAAAT0BAAAAAT4BAEEAIT8BAAAAAUABAAAAAUEBAAAAAQs3AQAAAAE4AQAAAAU5AQAAAAU6AQAAAAE7AQAAAAE8AQAAAAE9AQAAAAE-AQA_ACE_AQAAAAFAAQAAAAFBAQAAAAEDRgAAAwAgRwAAAwAgSAAAAwAgCDcBAAAAATgBAAAABDkBAAAABDoBAAAAATsBAAAAATwBAAAAAT0BAAAAAT4BAEkAIQwDAABMACAsAABKADAtAAADABAuAABKADAvAQBFACEwAQBGACExAQBHACEyAQBGACEzAQBGACE0AQBFACE1QABLACE2QABLACEIN0AAAAABOEAAAAAEOUAAAAAEOkAAAAABO0AAAAABPEAAAAABPUAAAAABPkAAPAAhCwQAAEgAICwAAEQAMC0AAAkAEC4AAEQAMC8BAEUAIUIBAEYAIUMBAEcAIUQBAEcAIUUBAEcAIUkAAAkAIEoAAAkAIAAAAAABTgEAAAABAU4BAAAAAQFOQAAAAAEFEgAAagAgEwAAbQAgSwAAawAgTAAAbAAgUQAAAQAgAxIAAGoAIEsAAGsAIFEAAAEAIAAAAAsSAABaADATAABfADBLAABbADBMAABcADBNAABdACBOAABeADBPAABeADBQAABeADBRAABeADBSAABgADBTAABhADAHLwEAAAABMAEAAAABMQEAAAABMgEAAAABMwEAAAABNUAAAAABNkAAAAABAgAAAAUAIBIAAGUAIAMAAAAFACASAABlACATAABkACABCwAAaQAwDAMAAEwAICwAAEoAMC0AAAMAEC4AAEoAMC8BAAAAATABAEYAITEBAEcAITIBAEYAITMBAEYAITQBAEUAITVAAEsAITZAAEsAIQIAAAAFACALAABkACACAAAAYgAgCwAAYwAgCywAAGEAMC0AAGIAEC4AAGEAMC8BAEUAITABAEYAITEBAEcAITIBAEYAITMBAEYAITQBAEUAITVAAEsAITZAAEsAIQssAABhADAtAABiABAuAABhADAvAQBFACEwAQBGACExAQBHACEyAQBGACEzAQBGACE0AQBFACE1QABLACE2QABLACEHLwEAUQAhMAEAUQAhMQEAUgAhMgEAUQAhMwEAUQAhNUAAUwAhNkAAUwAhBy8BAFEAITABAFEAITEBAFIAITIBAFEAITMBAFEAITVAAFMAITZAAFMAIQcvAQAAAAEwAQAAAAExAQAAAAEyAQAAAAEzAQAAAAE1QAAAAAE2QAAAAAEEEgAAWgAwSwAAWwAwTQAAXQAgUQAAXgAwAAQEAABnACBDAABNACBEAABNACBFAABNACAHLwEAAAABMAEAAAABMQEAAAABMgEAAAABMwEAAAABNUAAAAABNkAAAAABBS8BAAAAAUIBAAAAAUMBAAAAAUQBAAAAAUUBAAAAAQIAAAABACASAABqACADAAAACQAgEgAAagAgEwAAbgAgBwAAAAkAIAsAAG4AIC8BAFEAIUIBAFEAIUMBAFIAIUQBAFIAIUUBAFIAIQUvAQBRACFCAQBRACFDAQBSACFEAQBSACFFAQBSACECBAYCBQADAQMAAQEEBwAAAAADBQAIGAAJGQAKAAAAAwUACBgACRkACgEDAAEBAwABAwUADxgAEBkAEQAAAAMFAA8YABAZABEGAgEHCAEICwEJDAEKDQEMDwENEQQOEgUPFAEQFgQRFwYUGAEVGQEWGgQaHQcbHgscHwIdIAIeIQIfIgIgIwIhJQIiJwQjKAwkKgIlLAQmLQ0nLgIoLwIpMAQqMw4rNBI"
 };
 async function decodeBase64AsWasm(wasmBase64) {
     const { Buffer } = await Promise.resolve().then(() => tslib_1.__importStar(__webpack_require__(15)));
@@ -314,7 +315,7 @@ module.exports = require("@prisma/client/runtime/query_compiler_fast_bg.postgres
  * model files in the `model` directory!
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.MaterialScalarFieldEnum = exports.UserScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const tslib_1 = __webpack_require__(5);
 const runtime = tslib_1.__importStar(__webpack_require__(14));
 /**
@@ -370,7 +371,8 @@ exports.JsonNull = runtime.JsonNull;
  */
 exports.AnyNull = runtime.AnyNull;
 exports.ModelName = {
-    User: 'User'
+    User: 'User',
+    Material: 'Material'
 };
 /**
  * Enums
@@ -387,6 +389,16 @@ exports.UserScalarFieldEnum = {
     firstName: 'firstName',
     lastName: 'lastName',
     avatar: 'avatar'
+};
+exports.MaterialScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    url: 'url',
+    fileType: 'fileType',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
 };
 exports.SortOrder = {
     asc: 'asc',
@@ -615,6 +627,298 @@ class UpdateUserDto {
 }
 exports.UpdateUserDto = UpdateUserDto;
 
+
+/***/ }),
+/* 26 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MaterialsModule = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(2);
+const materials_service_1 = __webpack_require__(27);
+const materials_controller_1 = __webpack_require__(29);
+const prisma_module_1 = __webpack_require__(8);
+let MaterialsModule = class MaterialsModule {
+};
+exports.MaterialsModule = MaterialsModule;
+exports.MaterialsModule = MaterialsModule = tslib_1.__decorate([
+    (0, common_1.Module)({
+        imports: [prisma_module_1.PrismaModule],
+        controllers: [materials_controller_1.MaterialsController],
+        providers: [materials_service_1.MaterialsService],
+        exports: [materials_service_1.MaterialsService],
+    })
+], MaterialsModule);
+
+
+/***/ }),
+/* 27 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MaterialsService = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(2);
+const prisma_service_1 = __webpack_require__(9);
+const fs = tslib_1.__importStar(__webpack_require__(28));
+let MaterialsService = class MaterialsService {
+    constructor(prisma) {
+        this.prisma = prisma;
+    }
+    getExtensionFromMimeType(mimeType) {
+        const mimeToExt = {
+            'text/plain': '.txt',
+            'application/pdf': '.pdf',
+            'application/msword': '.doc',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '.docx',
+            'image/jpeg': '.jpg',
+            'image/png': '.png',
+            'image/gif': '.gif',
+        };
+        return mimeToExt[mimeType] || '.bin';
+    }
+    async create(createMaterialDto, file) {
+        const { name, description, userId } = createMaterialDto;
+        if (!file) {
+            throw new common_1.BadRequestException('File is required when creating a material.');
+        }
+        return this.prisma.material.create({
+            data: {
+                name,
+                description,
+                userId,
+                fileType: file.mimetype,
+                url: file.path,
+            },
+        });
+    }
+    //   TODO: Implement get files by user ID and pagination
+    async findAll() {
+        return this.prisma.material.findMany({
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                url: true,
+                fileType: true,
+                userId: true,
+                createdAt: true,
+                updatedAt: true,
+            },
+        });
+    }
+    async findOne(id) {
+        const material = await this.prisma.material.findUnique({
+            where: { id },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                url: true,
+                fileType: true,
+                userId: true,
+                createdAt: true,
+                updatedAt: true,
+            },
+        });
+        if (!material) {
+            throw new common_1.NotFoundException(`Material with ID ${id} not found`);
+        }
+        return material;
+    }
+    async download(id, res) {
+        const material = await this.prisma.material.findUnique({
+            where: { id },
+            select: {
+                id: true,
+                name: true,
+                url: true,
+                fileType: true,
+            },
+        });
+        if (!material) {
+            throw new common_1.NotFoundException(`Material with ID ${id} not found`);
+        }
+        if (!fs.existsSync(material.url)) {
+            throw new common_1.NotFoundException(`File not found on disk`);
+        }
+        res.setHeader('Content-Type', material.fileType);
+        res.setHeader('Content-Disposition', `attachment; filename="${material.name}"`);
+        const fileStream = fs.createReadStream(material.url);
+        fileStream.pipe(res);
+    }
+    async remove(id) {
+        const material = await this.prisma.material.findUnique({
+            where: { id },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                url: true,
+                fileType: true,
+                userId: true,
+                createdAt: true,
+                updatedAt: true,
+            },
+        });
+        if (!material) {
+            throw new common_1.NotFoundException(`Material with ID ${id} not found`);
+        }
+        // Delete file from disk if it exists
+        if (material.url && fs.existsSync(material.url)) {
+            try {
+                fs.unlinkSync(material.url);
+            }
+            catch (error) {
+                // Log error but don't fail the deletion
+                console.error(`Failed to delete file ${material.url}:`, error);
+            }
+        }
+        return await this.prisma.material.delete({
+            where: { id },
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                url: true,
+                fileType: true,
+                userId: true,
+                createdAt: true,
+                updatedAt: true,
+            },
+        });
+    }
+};
+exports.MaterialsService = MaterialsService;
+exports.MaterialsService = MaterialsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof prisma_service_1.PrismaService !== "undefined" && prisma_service_1.PrismaService) === "function" ? _a : Object])
+], MaterialsService);
+
+
+/***/ }),
+/* 28 */
+/***/ ((module) => {
+
+module.exports = require("fs");
+
+/***/ }),
+/* 29 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MaterialsController = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(2);
+const platform_express_1 = __webpack_require__(30);
+const multer = __webpack_require__(31);
+const materials_service_1 = __webpack_require__(27);
+const create_material_dto_1 = __webpack_require__(32);
+const express_1 = __webpack_require__(33);
+let MaterialsController = class MaterialsController {
+    constructor(materialsService) {
+        this.materialsService = materialsService;
+    }
+    create(createMaterialDto, file) {
+        if (!file) {
+            throw new common_1.BadRequestException('A file must be uploaded when creating a material.');
+        }
+        return this.materialsService.create(createMaterialDto, file);
+    }
+    findAll() {
+        return this.materialsService.findAll();
+    }
+    async download(id, res) {
+        return this.materialsService.download(id, res);
+    }
+    remove(id) {
+        return this.materialsService.remove(id);
+    }
+};
+exports.MaterialsController = MaterialsController;
+tslib_1.__decorate([
+    (0, common_1.Post)(),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file', {
+        storage: multer.diskStorage({
+            destination: (req, file, cb) => {
+                const uploadPath = 'apps/api/uploads/materials';
+                cb(null, uploadPath);
+            },
+            filename: (req, file, cb) => {
+                const uniqueSuffix = Date.now() + '-' + Math.random().toString(36).substring(2);
+                const extension = file.originalname.split('.').pop() || 'bin';
+                cb(null, uniqueSuffix + '.' + extension);
+            },
+        }),
+    })),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__param(1, (0, common_1.UploadedFile)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_b = typeof create_material_dto_1.CreateMaterialDto !== "undefined" && create_material_dto_1.CreateMaterialDto) === "function" ? _b : Object, Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], MaterialsController.prototype, "create", null);
+tslib_1.__decorate([
+    (0, common_1.Get)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", void 0)
+], MaterialsController.prototype, "findAll", null);
+tslib_1.__decorate([
+    (0, common_1.Get)(':id/download'),
+    tslib_1.__param(0, (0, common_1.Param)('id')),
+    tslib_1.__param(1, (0, common_1.Res)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [String, typeof (_c = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _c : Object]),
+    tslib_1.__metadata("design:returntype", Promise)
+], MaterialsController.prototype, "download", null);
+tslib_1.__decorate([
+    (0, common_1.Delete)(':id'),
+    tslib_1.__param(0, (0, common_1.Param)('id')),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [String]),
+    tslib_1.__metadata("design:returntype", void 0)
+], MaterialsController.prototype, "remove", null);
+exports.MaterialsController = MaterialsController = tslib_1.__decorate([
+    (0, common_1.Controller)('materials'),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof materials_service_1.MaterialsService !== "undefined" && materials_service_1.MaterialsService) === "function" ? _a : Object])
+], MaterialsController);
+
+
+/***/ }),
+/* 30 */
+/***/ ((module) => {
+
+module.exports = require("@nestjs/platform-express");
+
+/***/ }),
+/* 31 */
+/***/ ((module) => {
+
+module.exports = require("multer");
+
+/***/ }),
+/* 32 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CreateMaterialDto = void 0;
+class CreateMaterialDto {
+}
+exports.CreateMaterialDto = CreateMaterialDto;
+
+
+/***/ }),
+/* 33 */
+/***/ ((module) => {
+
+module.exports = require("express");
 
 /***/ })
 /******/ 	]);
