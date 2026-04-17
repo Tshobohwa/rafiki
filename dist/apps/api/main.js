@@ -669,18 +669,6 @@ let MaterialsService = class MaterialsService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    getExtensionFromMimeType(mimeType) {
-        const mimeToExt = {
-            'text/plain': '.txt',
-            'application/pdf': '.pdf',
-            'application/msword': '.doc',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '.docx',
-            'image/jpeg': '.jpg',
-            'image/png': '.png',
-            'image/gif': '.gif',
-        };
-        return mimeToExt[mimeType] || '.bin';
-    }
     async create(createMaterialDto, file) {
         const { name, description, userId } = createMaterialDto;
         if (!file) {
