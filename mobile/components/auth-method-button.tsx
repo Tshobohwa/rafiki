@@ -6,7 +6,6 @@ export default function AuthMethodButton({
   text = "",
   children,
 }: {
-  icon: React.ReactNode;
   image?: string;
   onPress: () => void;
   text: string;

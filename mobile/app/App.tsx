@@ -17,6 +17,7 @@ import FreeAnswerQuestion from "../screens/free-answer-question";
 import StartAQuizScreen from "@/screens/start-a-quiz";
 import UploadFileOrPasteLink from "@/screens/upload-file-or-paste-link";
 import Login from "@/screens/login";
+import SignupScreen from "@/screens/signup";
 
 export const App = () => {
   const [fontsLoaded] = useFonts({
@@ -37,7 +38,7 @@ export const App = () => {
 
   return (
     <SafeAreaProvider>
-      <Login />
+      <SignupScreen />
     </SafeAreaProvider>
   );
 };
