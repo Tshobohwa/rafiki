@@ -19,6 +19,7 @@ import UploadFileOrPasteLink from "@/screens/upload-file-or-paste-link";
 import Login from "@/screens/login";
 import SignupScreen from "@/screens/signup";
 import SelectSchoolLevelScreen from "@/screens/select-school-level";
+import OTPVerificationScreen from "@/screens/otp-verification";
 
 export const App = () => {
   const [fontsLoaded] = useFonts({
@@ -39,7 +40,7 @@ export const App = () => {
 
   return (
     <SafeAreaProvider>
-      <SelectSchoolLevelScreen />
+      <OTPVerificationScreen />
     </SafeAreaProvider>
   );
 };
