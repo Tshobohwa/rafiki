@@ -18,6 +18,7 @@ import StartAQuizScreen from "@/screens/start-a-quiz";
 import UploadFileOrPasteLink from "@/screens/upload-file-or-paste-link";
 import Login from "@/screens/login";
 import SignupScreen from "@/screens/signup";
+import SelectSchoolLevelScreen from "@/screens/select-school-level";
 
 export const App = () => {
   const [fontsLoaded] = useFonts({
@@ -38,7 +39,7 @@ export const App = () => {
 
   return (
     <SafeAreaProvider>
-      <SignupScreen />
+      <SelectSchoolLevelScreen />
     </SafeAreaProvider>
   );
 };
