@@ -41,7 +41,7 @@ export const App = () => {
 
   return (
     <SafeAreaProvider>
-      <CongratulationsScreen />
+      <FreeAnswerQuestion />
     </SafeAreaProvider>
   );
 };
