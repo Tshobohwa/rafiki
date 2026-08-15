@@ -22,6 +22,7 @@ import SelectSchoolLevelScreen from "@/screens/select-school-level";
 import OTPVerificationScreen from "@/screens/otp-verification";
 import CongratulationsScreen from "@/screens/congratulations";
 import CreateNewClassScreen from "@/screens/new-class";
+import MyClassesScreen from "@/screens/my-classes";
 
 export const App = () => {
   const [fontsLoaded] = useFonts({
@@ -42,7 +43,7 @@ export const App = () => {
 
   return (
     <SafeAreaProvider>
-      <CreateNewClassScreen />
+      <MyClassesScreen />
     </SafeAreaProvider>
   );
 };
