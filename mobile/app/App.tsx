@@ -13,17 +13,7 @@ import {
   Outfit_900Black,
 } from "@expo-google-fonts/outfit";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import FreeAnswerQuestion from "../screens/free-answer-question";
-import StartAQuizScreen from "@/screens/start-a-quiz";
-import UploadFileOrPasteLink from "@/screens/upload-file-or-paste-link";
-import Login from "@/screens/login";
-import SignupScreen from "@/screens/signup";
-import SelectSchoolLevelScreen from "@/screens/select-school-level";
-import OTPVerificationScreen from "@/screens/otp-verification";
-import CongratulationsScreen from "@/screens/congratulations";
-import CreateNewClassScreen from "@/screens/new-class";
-import MyClassesScreen from "@/screens/my-classes";
-import ClassScreen from "@/screens/class";
+import BottomTabs from "../navigation/BottomTabs";
 
 export const App = () => {
   const [fontsLoaded] = useFonts({
@@ -38,16 +28,15 @@ export const App = () => {
     "Outfit-Black": Outfit_900Black,
   });
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  if (!fontsLoaded) return null;
 
   return (
     <SafeAreaProvider>
-      <ClassScreen />
+      <BottomTabs />
     </SafeAreaProvider>
   );
 };
+
 const styles = StyleSheet.create({});
 
 export default App;
