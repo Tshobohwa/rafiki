@@ -23,6 +23,7 @@ import OTPVerificationScreen from "@/screens/otp-verification";
 import CongratulationsScreen from "@/screens/congratulations";
 import CreateNewClassScreen from "@/screens/new-class";
 import MyClassesScreen from "@/screens/my-classes";
+import ClassScreen from "@/screens/class";
 
 export const App = () => {
   const [fontsLoaded] = useFonts({
@@ -43,7 +44,7 @@ export const App = () => {
 
   return (
     <SafeAreaProvider>
-      <MyClassesScreen />
+      <ClassScreen />
     </SafeAreaProvider>
   );
 };
