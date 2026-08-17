@@ -6,7 +6,6 @@ import HomeScreen from "../screens/home";
 import ProfileScreen from "../screens/profile";
 import QuizzesScreen from "../screens/quizzes";
 import MyClassesScreen from "@/screens/my-classes";
-import CameraScreen from "../screens/camera";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +21,7 @@ function CameraButton({ children, onPress }: any) {
   );
 }
 
-export default function BottomTabs() {
+export default function BottomTabs({ navigation }: any) {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -50,11 +49,11 @@ export default function BottomTabs() {
 
       <Tab.Screen
         name="Camera"
-        component={CameraScreen}
+        component={() => null}
         options={{
           tabBarButton: (props) => (
             <CameraButton
-              onPress={props.onPress}
+              onPress={() => navigation.navigate("CameraModal")}
               accessibilityLabel={props.accessibilityLabel}
             >
               <Ionicons name="camera" size={28} color="#fff" />

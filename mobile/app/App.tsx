@@ -13,7 +13,15 @@ import {
   Outfit_900Black,
 } from "@expo-google-fonts/outfit";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import {
+  NavigationContainer,
+  NavigationIndependentTree,
+} from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomTabs from "../navigation/BottomTabs";
+import CameraScreen from "../screens/camera";
+
+const Stack = createNativeStackNavigator();
 
 export const App = () => {
   const [fontsLoaded] = useFonts({
@@ -32,7 +40,18 @@ export const App = () => {
 
   return (
     <SafeAreaProvider>
-      <BottomTabs />
+      <NavigationIndependentTree>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="MainTabs" component={BottomTabs} />
+            <Stack.Screen
+              name="CameraModal"
+              component={CameraScreen}
+              options={{ presentation: "fullScreenModal" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </NavigationIndependentTree>
     </SafeAreaProvider>
   );
 };
