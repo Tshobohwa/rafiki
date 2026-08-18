@@ -105,8 +105,14 @@ export default function CameraScreen() {
         }}
       >
         <View style={styles.controls} pointerEvents="box-none">
-          <TouchableOpacity style={styles.captureButton} onPress={takePicture}>
-            <Text style={styles.captureText}>Snap</Text>
+          <TouchableOpacity
+            style={styles.captureButtonContainer}
+            onPress={takePicture}
+            activeOpacity={0.85}
+          >
+            <View style={styles.captureButtonRing}>
+              <View style={styles.captureButtonInner} />
+            </View>
           </TouchableOpacity>
         </View>
       </CameraComp>
@@ -124,16 +130,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingBottom: 36,
   },
-  captureButton: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
-    backgroundColor: "rgba(255,255,255,0.2)",
+  captureButtonContainer: {
+    width: 88,
+    height: 88,
+    borderRadius: 44,
+    backgroundColor: "rgba(255,255,255,0.12)",
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 2,
-    borderColor: "#fff",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    elevation: 8,
   },
-  captureText: { color: "#fff", fontWeight: "600" },
+  captureButtonRing: {
+    width: 74,
+    height: 74,
+    borderRadius: 37,
+    backgroundColor: "#ffffff",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 4,
+    borderColor: "rgba(47, 149, 220, 0.8)",
+  },
+  captureButtonInner: {
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    backgroundColor: "#2f95dc",
+    borderWidth: 3,
+    borderColor: "#dfeeff",
+  },
   center: { flex: 1, justifyContent: "center", alignItems: "center" },
 });
