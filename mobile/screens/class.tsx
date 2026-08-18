@@ -1,3 +1,4 @@
+import MaterialCard from "@/components/cards/material-card";
 import SlideCard from "@/components/cards/slide-card";
 import { PrimaryButton } from "@/components/primary-button";
 import { ScrollView, Text } from "react-native";
@@ -12,6 +13,7 @@ export default function ClassScreen() {
         </Text>
         <Text>RECENT</Text>
         <Text>MATERIAL</Text>
+        <MaterialCard />
         <PrimaryButton text="Add material" />
         <Text>SLIDES</Text>
         <SlideCard
