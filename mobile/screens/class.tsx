@@ -1,4 +1,5 @@
 import MaterialCard from "@/components/cards/material-card";
+import QuizzCard from "@/components/cards/quizz-card";
 import SlideCard from "@/components/cards/slide-card";
 import { PrimaryButton } from "@/components/primary-button";
 import { ScrollView, Text } from "react-native";
@@ -23,6 +24,13 @@ export default function ClassScreen() {
         />
         <PrimaryButton text="Create slides" />
         <Text>QUIZZES</Text>
+        <QuizzCard
+          title={"Quizz 1"}
+          description={"Description for Quizz 1"}
+          onPress={() => {}}
+          totalQuestions={10}
+          answerdQuestions={7}
+        />
         <PrimaryButton text="Start new quiz" />
       </ScrollView>
     </SafeAreaView>
