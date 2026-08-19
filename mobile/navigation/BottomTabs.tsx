@@ -30,8 +30,19 @@ export default function BottomTabs({ navigation }: any) {
         tabBarActiveTintColor: "#2f95dc",
         tabBarInactiveTintColor: "gray",
         tabBarStyle: {
-          height: 60,
-          paddingBottom: Platform.OS === "android" ? 8 : 20,
+          height: 90,
+          paddingBottom: Platform.OS === "android" ? 12 : 20,
+          borderTopWidth: 1,
+          borderTopColor: "rgba(0,122,255,0.12)",
+          backgroundColor: "transparent",
+          elevation: 0,
+          shadowColor: "transparent",
+          justifyContent: "center",
+        },
+        tabBarItemStyle: {
+          justifyContent: "center",
+          alignItems: "center",
+          paddingVertical: 20,
         },
         tabBarIcon: ({ color, size }) => {
           let name: any = "home";
@@ -40,7 +51,11 @@ export default function BottomTabs({ navigation }: any) {
           else if (route.name === "Profile") name = "person";
           else if (route.name === "Quizzes") name = "document-text";
           else if (route.name === "Camera") name = "camera";
-          return <Ionicons name={name} size={size} color={color} />;
+          return (
+            <View>
+              <Ionicons name={name} size={size} color={color} />
+            </View>
+          );
         },
       })}
     >
@@ -70,21 +85,19 @@ export default function BottomTabs({ navigation }: any) {
 
 const styles = StyleSheet.create({
   cameraButtonContainer: {
-    top: -30,
+    top: 0,
+    height: "100%",
     justifyContent: "center",
     alignItems: "center",
   },
   cameraButton: {
-    width: 68,
-    height: 68,
-    borderRadius: 34,
-    backgroundColor: "#2f95dc",
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "rgba(0,122,255,0.2)",
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 6,
+    shadowColor: "transparent",
+    elevation: 0,
   },
 });

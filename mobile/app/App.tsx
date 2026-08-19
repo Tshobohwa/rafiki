@@ -39,28 +39,28 @@ export const App = () => {
 
   if (!fontsLoaded) return null;
 
-  return (
-    <SafeAreaProvider>
-      <ClassScreen />
-    </SafeAreaProvider>
-  );
-
   // return (
   //   <SafeAreaProvider>
-  //     <NavigationIndependentTree>
-  //       <NavigationContainer>
-  //         <Stack.Navigator screenOptions={{ headerShown: false }}>
-  //           <Stack.Screen name="MainTabs" component={BottomTabs} />
-  //           <Stack.Screen
-  //             name="CameraModal"
-  //             component={CameraScreen}
-  //             options={{ presentation: "fullScreenModal" }}
-  //           />
-  //         </Stack.Navigator>
-  //       </NavigationContainer>
-  //     </NavigationIndependentTree>
+  //     <ClassScreen />
   //   </SafeAreaProvider>
   // );
+
+  return (
+    <SafeAreaProvider>
+      <NavigationIndependentTree>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="MainTabs" component={BottomTabs} />
+            <Stack.Screen
+              name="CameraModal"
+              component={CameraScreen}
+              options={{ presentation: "fullScreenModal" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </NavigationIndependentTree>
+    </SafeAreaProvider>
+  );
 };
 
 const styles = StyleSheet.create({});
