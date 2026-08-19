@@ -5,6 +5,7 @@ import { PrimaryButton } from "@/components/primary-button";
 import { SecondaryButton } from "@/components/secondary-button";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function ClassScreen() {
   return (
@@ -17,7 +18,10 @@ export default function ClassScreen() {
         <View>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>QUIZZES</Text>
-            <SecondaryButton text="Start new quiz" />
+            <SecondaryButton
+              text="Start new quiz"
+              icon={<AntDesign name="plus" size={16} color="#007AFF" />}
+            />
           </View>
           <QuizzCard
             title={"Quizz 1"}
@@ -30,14 +34,20 @@ export default function ClassScreen() {
         <View>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>MATERIAL</Text>
-            <SecondaryButton text="Add material" />
+            <SecondaryButton
+              text="Add material"
+              icon={<AntDesign name="plus" size={16} color="#007AFF" />}
+            />
           </View>
           <MaterialCard />
         </View>
         <View>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>SLIDES</Text>
-            <SecondaryButton text="Create slides" />
+            <SecondaryButton
+              text="Create slides"
+              icon={<AntDesign name="plus" size={16} color="#007AFF" />}
+            />
           </View>
           <SlideCard
             title="Introduction to Python"
@@ -60,8 +70,5 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontFamily: "Outfit-Medium",
     fontSize: 18,
-  },
-  addButton: {
-    backgroundColor: "#007AFF",
   },
 });

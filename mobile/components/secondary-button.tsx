@@ -14,8 +14,8 @@ export const SecondaryButton = (props: {
       style={[styles.container, props.disabled ? styles.disabled : null]}
       disabled={props.disabled}
     >
-      <Text style={styles.text}>{props.text}</Text>
       {props.icon}
+      <Text style={styles.text}>{props.text}</Text>
     </TouchableOpacity>
   );
 };
