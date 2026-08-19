@@ -15,8 +15,8 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 
 export default function ClassScreen() {
   return (
-    <SafeAreaView style={{ flex: 1, padding: 20, gap: 20 }}>
-      <ScrollView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView style={{ padding: 16 }} contentContainerStyle={{ gap: 24 }}>
         <Text style={{ fontFamily: "Outfit-Medium", fontSize: 24 }}>
           Class: Programming language and paradigms
         </Text>
