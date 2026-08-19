@@ -3,7 +3,13 @@ import QuizzCard from "@/components/cards/quizz-card";
 import SlideCard from "@/components/cards/slide-card";
 import { PrimaryButton } from "@/components/primary-button";
 import { SecondaryButton } from "@/components/secondary-button";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
@@ -30,6 +36,9 @@ export default function ClassScreen() {
             totalQuestions={10}
             answerdQuestions={7}
           />
+          <TouchableOpacity style={{ alignSelf: "center", marginVertical: 10 }}>
+            <Text style={styles.seeAllText}>See all</Text>
+          </TouchableOpacity>
         </View>
         <View>
           <View style={styles.sectionHeader}>
@@ -40,6 +49,9 @@ export default function ClassScreen() {
             />
           </View>
           <MaterialCard />
+          <TouchableOpacity style={{ alignSelf: "center", marginVertical: 10 }}>
+            <Text style={styles.seeAllText}>See all</Text>
+          </TouchableOpacity>
         </View>
         <View>
           <View style={styles.sectionHeader}>
@@ -54,6 +66,9 @@ export default function ClassScreen() {
             description="Learn the basics of Python programming."
             numberOfSlides={5}
           />
+          <TouchableOpacity style={{ alignSelf: "center", marginVertical: 10 }}>
+            <Text style={styles.seeAllText}>See all</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -70,5 +85,9 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontFamily: "Outfit-Medium",
     fontSize: 18,
+  },
+  seeAllText: {
+    fontFamily: "Outfit-Regular",
+    color: "#007AFF",
   },
 });
