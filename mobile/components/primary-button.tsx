@@ -1,17 +1,28 @@
 import { ReactNode } from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  DimensionValue,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 
 export const PrimaryButton = (props: {
   text: string;
   icon?: ReactNode;
   onPress?: () => void;
   disabled?: boolean;
+  width?: DimensionValue;
+  // style:
 }) => {
   return (
     <TouchableOpacity
       onPress={props.onPress}
       activeOpacity={0.8}
-      style={[styles.container, props.disabled ? styles.disabled : null]}
+      style={[
+        styles.container,
+        props.disabled ? styles.disabled : null,
+        { width: props.width },
+      ]}
       disabled={props.disabled}
     >
       <Text style={{ fontFamily: "Outfit-Regular", color: "white" }}>
@@ -27,7 +38,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#007AFF",
     paddingVertical: 12,
     paddingHorizontal: 24,
-    borderRadius: 8,
+    borderRadius: 24,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
