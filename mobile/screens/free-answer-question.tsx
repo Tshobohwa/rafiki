@@ -6,9 +6,7 @@ import { useEffect, useState } from "react";
 export default function FreeAnswerQuestion() {
   const [answer, setAnswer] = useState("");
   return (
-    <SafeAreaView
-      style={{ flex: 1, padding: 20, justifyContent: "space-between" }}
-    >
+    <View style={{ flex: 1, padding: 20, justifyContent: "space-between" }}>
       <View style={{}}>
         <Text style={{ fontFamily: "Outfit-Medium", fontSize: 24 }}>
           Explain how it is possible to have a free answer question in this app.
@@ -33,6 +31,6 @@ export default function FreeAnswerQuestion() {
         />
       </View>
       <PrimaryButton text="Submit" />
-    </SafeAreaView>
+    </View>
   );
 }

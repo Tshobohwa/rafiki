@@ -22,6 +22,7 @@ import BottomTabs from "../navigation/BottomTabs";
 import CameraScreen from "../screens/camera";
 import ClassScreen from "@/screens/class";
 import CreateNewClassScreen from "@/screens/new-class";
+import QuizzScreen from "@/screens/quizz";
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +63,7 @@ export const App = () => {
               component={CreateNewClassScreen}
             />
             <Stack.Screen name="ClassScreen" component={ClassScreen} />
+            <Stack.Screen name="QuizzScreen" component={QuizzScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </NavigationIndependentTree>

@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import AnswerOption from "../components/answer-option";
 import { PrimaryButton } from "../components/primary-button";
 
-export default function OptionsQuestion() {
+export default function OptionsQuestionScreen() {
   const answers = [
     {
       id: "A",
@@ -32,9 +32,7 @@ export default function OptionsQuestion() {
   ];
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, padding: 20, justifyContent: "space-between" }}
-    >
+    <View style={{ flex: 1, padding: 20, justifyContent: "space-between" }}>
       <View>
         <Text
           style={{
@@ -60,6 +58,6 @@ export default function OptionsQuestion() {
         </View>
       </View>
       <PrimaryButton text="Next question" />
-    </SafeAreaView>
+    </View>
   );
 }
