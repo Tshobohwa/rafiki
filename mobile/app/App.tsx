@@ -21,6 +21,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomTabs from "../navigation/BottomTabs";
 import CameraScreen from "../screens/camera";
 import ClassScreen from "@/screens/class";
+import CreateNewClassScreen from "@/screens/new-class";
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +57,11 @@ export const App = () => {
               component={CameraScreen}
               options={{ presentation: "fullScreenModal" }}
             />
+            <Stack.Screen
+              name="CreateNewClassScreen"
+              component={CreateNewClassScreen}
+            />
+            <Stack.Screen name="ClassScreen" component={ClassScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </NavigationIndependentTree>

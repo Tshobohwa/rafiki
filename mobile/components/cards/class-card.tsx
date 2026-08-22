@@ -6,15 +6,17 @@ export default function ClassCard({
   slides,
   quizzes,
   materials,
+  onPress,
 }: {
   title: string;
   description: string;
   slides: number;
   quizzes: number;
   materials: number;
+  onPress: () => void;
 }) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Text style={{ fontFamily: "Outfit-Medium", fontSize: 18 }}>{title}</Text>
       <Text
         style={{ fontSize: 16, color: "#666", fontFamily: "Outfit-Medium" }}
