@@ -53,7 +53,7 @@ export default function NewQuizzCard() {
         </Text>
 
         <View style={{ flexDirection: "row", alignItems: "baseline", gap: 3 }}>
-          <AntDesign name="file-text" size={16} color="#666" />{" "}
+          <AntDesign name="file-text" size={16} color="#666" />
           <Text style={{ fontFamily: "Outfit-Regular" }}>Txt</Text>
         </View>
       </View>
