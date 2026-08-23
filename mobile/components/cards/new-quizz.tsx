@@ -16,7 +16,7 @@ export default function NewQuizzCard() {
       }}
     >
       <Text style={{ fontFamily: "Outfit-Medium", fontSize: 18 }}>
-        Start New Quizz
+        Start a new quizz
       </Text>
       <Text
         style={{
