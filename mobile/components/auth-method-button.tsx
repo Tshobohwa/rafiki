@@ -23,6 +23,8 @@ export default function AuthMethodButton({
         padding: 10,
         borderRadius: 55 / 2,
         height: 55,
+        alignContent: "center",
+        justifyContent: "center",
       }}
     >
       {children}

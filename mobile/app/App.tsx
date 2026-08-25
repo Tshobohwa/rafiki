@@ -23,6 +23,9 @@ import CameraScreen from "../screens/camera";
 import ClassScreen from "@/screens/class";
 import CreateNewClassScreen from "@/screens/new-class";
 import QuizzScreen from "@/screens/quizz";
+import LoginScreen from "@/screens/login";
+import SignupScreen from "@/screens/signup";
+import AuthenticationScreen from "@/screens/authentication";
 
 const Stack = createNativeStackNavigator();
 
@@ -52,6 +55,12 @@ export const App = () => {
       <NavigationIndependentTree>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen
+              name="AuthenticationScreen"
+              component={AuthenticationScreen}
+            />
+            <Stack.Screen name="LoginScreen" component={LoginScreen} />
+            <Stack.Screen name="SignupScreen" component={SignupScreen} />
             <Stack.Screen name="MainTabs" component={BottomTabs} />
             <Stack.Screen
               name="CameraModal"
