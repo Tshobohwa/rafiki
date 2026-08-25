@@ -8,8 +8,10 @@ import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from "react-native-confirmation-code-field";
+import { useNavigation } from "expo-router";
 
 export default function OTPVerificationScreen() {
+  const navigation: any = useNavigation();
   const CELL_COUNT = 6;
   const [value, setValue] = useState("");
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
@@ -22,6 +24,7 @@ export default function OTPVerificationScreen() {
     Keyboard.dismiss();
     // TODO: call verification API with `value`
     console.log("Confirm OTP:", value);
+    navigation.navigate("MainTabs");
   };
 
   const allFilled = value.length === CELL_COUNT;
