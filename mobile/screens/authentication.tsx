@@ -55,6 +55,19 @@ export default function AuthenticationScreen() {
           >
             Rafiki AI
           </Text>
+          <Image
+            source={require("../assets/images/einstein.png")}
+            style={{ marginVertical: 20, alignSelf: "center" }}
+          />
+          <Text
+            style={{
+              fontSize: 20,
+              fontFamily: "Outfit-Medium",
+              textAlign: "center",
+            }}
+          >
+            Your AI learning partner
+          </Text>
         </View>
         <View style={{ gap: 10 }}>
           {!isKeyboardVisible && (
