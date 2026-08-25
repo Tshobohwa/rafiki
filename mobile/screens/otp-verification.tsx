@@ -31,7 +31,7 @@ export default function OTPVerificationScreen() {
       <Text style={styles.title}>Verify your email address</Text>
       <Text style={styles.subtitle}>
         Please enter the 6-digit code sent to your email address to verify your
-        account and complete the registration process.
+        account.
       </Text>
 
       <View style={styles.otpRow}>
@@ -73,21 +73,21 @@ const styles = StyleSheet.create({
   subtitle: { fontFamily: "Outfit-Regular", fontSize: 16, marginTop: 10 },
   otpRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     marginTop: 32,
   },
   otpInput: {
-    width: 48,
-    height: 56,
+    width: 40,
+    height: 48,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: "#ccc",
     textAlign: "center",
     textAlignVertical: "center",
-    lineHeight: 56,
+    lineHeight: 48,
     fontSize: 20,
     fontFamily: "Outfit-Medium",
   },
-  codeFieldRoot: { width: "100%", justifyContent: "space-between" },
+  codeFieldRoot: { gap: 10 },
   focusInput: { borderColor: "#007AFF" },
 });

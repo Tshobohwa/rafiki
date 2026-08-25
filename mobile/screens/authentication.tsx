@@ -2,6 +2,7 @@ import AuthMethodButton from "@/components/auth-method-button";
 import { PrimaryButton } from "@/components/primary-button";
 import { SecondaryButton } from "@/components/secondary-button";
 import TextInputPrimary from "@/components/text-input-primary";
+import { useNavigation } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   Image,
@@ -17,6 +18,7 @@ import {
 } from "react-native-safe-area-context";
 
 export default function AuthenticationScreen() {
+  const navigation: any = useNavigation();
   const insets = useSafeAreaInsets();
   const [email, setEmail] = useState("");
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
@@ -36,6 +38,10 @@ export default function AuthenticationScreen() {
   }, []);
 
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
+  const submitEmailHandler = () => {
+    navigation.navigate("OTPVerificationScreen");
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -84,7 +90,9 @@ export default function AuthenticationScreen() {
             value={email}
             onChangeText={setEmail}
           />
-          {isEmailValid && <PrimaryButton text="Continue" />}
+          {isEmailValid && (
+            <PrimaryButton text="Continue" onPress={submitEmailHandler} />
+          )}
           <Text
             style={{
               textAlign: "center",

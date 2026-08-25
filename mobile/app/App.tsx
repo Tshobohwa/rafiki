@@ -26,6 +26,7 @@ import QuizzScreen from "@/screens/quizz";
 import LoginScreen from "@/screens/login";
 import SignupScreen from "@/screens/signup";
 import AuthenticationScreen from "@/screens/authentication";
+import OTPVerificationScreen from "@/screens/otp-verification";
 
 const Stack = createNativeStackNavigator();
 
@@ -58,6 +59,10 @@ export const App = () => {
             <Stack.Screen
               name="AuthenticationScreen"
               component={AuthenticationScreen}
+            />
+            <Stack.Screen
+              name="OTPVerificationScreen"
+              component={OTPVerificationScreen}
             />
             <Stack.Screen name="LoginScreen" component={LoginScreen} />
             <Stack.Screen name="SignupScreen" component={SignupScreen} />
