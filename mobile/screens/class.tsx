@@ -16,60 +16,12 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 export default function ClassScreen() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView style={{ padding: 16 }} contentContainerStyle={{ gap: 24 }}>
+      <ScrollView style={{ padding: 16 }} contentContainerStyle={{ gap: 10 }}>
         <Text style={{ fontFamily: "Outfit-Medium", fontSize: 24 }}>
           Class: Programming language and paradigms
         </Text>
-        <Text>RECENT</Text>
-        <View>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>QUIZZES</Text>
-            <SecondaryButton
-              text="Start new quiz"
-              icon={<AntDesign name="plus" size={16} color="#007AFF" />}
-            />
-          </View>
-          <QuizzCard
-            title={"Quizz 1"}
-            description={"Description for Quizz 1"}
-            onPress={() => {}}
-            totalQuestions={10}
-            answerdQuestions={7}
-          />
-          <TouchableOpacity style={{ alignSelf: "center", marginVertical: 10 }}>
-            <Text style={styles.seeAllText}>See all</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>MATERIAL</Text>
-            <SecondaryButton
-              text="Add material"
-              icon={<AntDesign name="plus" size={16} color="#007AFF" />}
-            />
-          </View>
-          <MaterialCard />
-          <TouchableOpacity style={{ alignSelf: "center", marginVertical: 10 }}>
-            <Text style={styles.seeAllText}>See all</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>SLIDES</Text>
-            <SecondaryButton
-              text="Create slides"
-              icon={<AntDesign name="plus" size={16} color="#007AFF" />}
-            />
-          </View>
-          <SlideCard
-            title="Introduction to Python"
-            description="Learn the basics of Python programming."
-            numberOfSlides={5}
-          />
-          <TouchableOpacity style={{ alignSelf: "center", marginVertical: 10 }}>
-            <Text style={styles.seeAllText}>See all</Text>
-          </TouchableOpacity>
-        </View>
+        <PrimaryButton text="Upload Material" />
+        <SecondaryButton text="Start a quizz" />
       </ScrollView>
     </SafeAreaView>
   );

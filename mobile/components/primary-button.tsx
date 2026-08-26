@@ -25,7 +25,9 @@ export const PrimaryButton = (props: {
       ]}
       disabled={props.disabled}
     >
-      <Text style={{ fontFamily: "Outfit-Regular", color: "white" }}>
+      <Text
+        style={{ fontFamily: "Outfit-Medium", color: "white", fontSize: 18 }}
+      >
         {props.text}
       </Text>
       {props.icon}
@@ -36,9 +38,9 @@ export const PrimaryButton = (props: {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#007AFF",
-    paddingVertical: 12,
+    paddingVertical: 14,
     paddingHorizontal: 24,
-    borderRadius: 24,
+    borderRadius: 28,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
