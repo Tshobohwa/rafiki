@@ -45,44 +45,44 @@ export const App = () => {
 
   if (!fontsLoaded) return null;
 
-  // return (
-  //   <SafeAreaProvider>
-  //     <ClassScreen />
-  //   </SafeAreaProvider>
-  // );
-
   return (
     <SafeAreaProvider>
-      <NavigationIndependentTree>
-        <NavigationContainer>
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen
-              name="AuthenticationScreen"
-              component={AuthenticationScreen}
-            />
-            <Stack.Screen
-              name="OTPVerificationScreen"
-              component={OTPVerificationScreen}
-            />
-            <Stack.Screen name="LoginScreen" component={LoginScreen} />
-            <Stack.Screen name="SignupScreen" component={SignupScreen} />
-            <Stack.Screen name="MainTabs" component={BottomTabs} />
-            <Stack.Screen
-              name="CameraModal"
-              component={CameraScreen}
-              options={{ presentation: "fullScreenModal" }}
-            />
-            <Stack.Screen
-              name="CreateNewClassScreen"
-              component={CreateNewClassScreen}
-            />
-            <Stack.Screen name="ClassScreen" component={ClassScreen} />
-            <Stack.Screen name="QuizzScreen" component={QuizzScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </NavigationIndependentTree>
+      <ClassScreen />
     </SafeAreaProvider>
   );
+
+  // return (
+  //   <SafeAreaProvider>
+  //     <NavigationIndependentTree>
+  //       <NavigationContainer>
+  //         <Stack.Navigator screenOptions={{ headerShown: false }}>
+  //           <Stack.Screen
+  //             name="AuthenticationScreen"
+  //             component={AuthenticationScreen}
+  //           />
+  //           <Stack.Screen
+  //             name="OTPVerificationScreen"
+  //             component={OTPVerificationScreen}
+  //           />
+  //           <Stack.Screen name="LoginScreen" component={LoginScreen} />
+  //           <Stack.Screen name="SignupScreen" component={SignupScreen} />
+  //           <Stack.Screen name="MainTabs" component={BottomTabs} />
+  //           <Stack.Screen
+  //             name="CameraModal"
+  //             component={CameraScreen}
+  //             options={{ presentation: "fullScreenModal" }}
+  //           />
+  //           <Stack.Screen
+  //             name="CreateNewClassScreen"
+  //             component={CreateNewClassScreen}
+  //           />
+  //           <Stack.Screen name="ClassScreen" component={ClassScreen} />
+  //           <Stack.Screen name="QuizzScreen" component={QuizzScreen} />
+  //         </Stack.Navigator>
+  //       </NavigationContainer>
+  //     </NavigationIndependentTree>
+  //   </SafeAreaProvider>
+  // );
 };
 
 const styles = StyleSheet.create({});
