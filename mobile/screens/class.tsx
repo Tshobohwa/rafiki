@@ -15,6 +15,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { useState } from "react";
 import NotesTab from "@/components/top-tabs/notes-tab";
 import SlidesTab from "@/components/top-tabs/slides-tab";
+import QuizzesTab from "@/components/top-tabs/quizzes-tab";
 
 export default function ClassScreen() {
   const tabs: string[] = ["Notes", "Quizzes", "Slides", "Schedule"];
@@ -54,7 +55,7 @@ export default function ClassScreen() {
           </View>
           {activeTab === "Notes" && <NotesTab />}
           {activeTab === "Slides" && <SlidesTab />}
-          {/* // {activeTab === "Notes" && <NotesTab />} */}
+          {activeTab === "Quizzes" && <QuizzesTab />}
           {/* // {activeTab === "Notes" && <NotesTab />} */}
         </View>
       </ScrollView>
