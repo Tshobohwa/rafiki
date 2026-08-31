@@ -14,6 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useState } from "react";
 import NotesTab from "@/components/top-tabs/notes-tab";
+import SlidesTab from "@/components/top-tabs/slides-tab";
 
 export default function ClassScreen() {
   const tabs: string[] = ["Notes", "Quizzes", "Slides", "Schedule"];
@@ -52,9 +53,9 @@ export default function ClassScreen() {
             ))}
           </View>
           {activeTab === "Notes" && <NotesTab />}
-          {/* {activeTab === "Notes" && <NotesTab />}
-          {activeTab === "Notes" && <NotesTab />}
-          {activeTab === "Notes" && <NotesTab />} */}
+          {activeTab === "Slides" && <SlidesTab />}
+          {/* // {activeTab === "Notes" && <NotesTab />} */}
+          {/* // {activeTab === "Notes" && <NotesTab />} */}
         </View>
       </ScrollView>
     </SafeAreaView>

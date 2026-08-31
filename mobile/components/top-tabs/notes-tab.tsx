@@ -4,7 +4,7 @@ import notes from "@/mock-data/notes";
 
 export default function NotesTab() {
   return (
-    <View>
+    <View style={{ marginTop: 10 }}>
       {notes.map((note) => (
         <NoteBtn text={note.title} format={note.format} />
       ))}
